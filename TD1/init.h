@@ -13,5 +13,5 @@
 
 
 
-int notre_init(int argc, char** argv, void (*DrawGLScene)());
+int notre_init(int argc, char** argv, void (*Modelisation)());
 #endif

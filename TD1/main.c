@@ -1,4 +1,4 @@
-// gcc main.c actions.o axes.o init.o lumiere.o switch_blend.o  switch_light.o VM_init.o -lm -lGL -lGLU -lglut -o test
+// gcc main.c actions.c axes.o init.o lumiere.o switch_blend.o  switch_light.o VM_init.o -lm -lGL -lGLU -lglut -o test
 
 #include "init.h"
 #include "axes.h"
@@ -7,17 +7,20 @@
 
 GLfloat xrot = 0.0f;   
 GLfloat yrot = 0.0f;   
-GLfloat z = -5.0f; 
+GLfloat z = -5.0f;
+
+int blend=0;
+int light=0;
+
 GLfloat angleA = 0; 
 GLfloat angleZ = 0; 
+GLfloat angleE = 0; 
+GLfloat angleR = 0; 
+GLfloat angleT = 0; 
+GLfloat triangle = 0; 
 
-GLvoid Modelisation()
-{
-  VM_init(); //initialisation de la matrice de modélisation
-
-  // Entre glPushMatrix et glPopMatrix s'écrit la description de la scène.
-
-  glPushMatrix();
+void ma_main (){
+	glPushMatrix();
   {
     float t=(0.174533);
     glPushMatrix();
@@ -79,16 +82,24 @@ GLvoid Modelisation()
 		glutSolidCube(1);
 		glPopMatrix();
 		
+		glTranslatef(0.25,0,0);
+		glRotated(angleZ, 0,0,1);
+		glTranslatef(-0.25,0,0);
+		
 		glColor3f(0,0.2,0);
-		glTranslatef(1,0,0);//déplacement 2
+		glTranslatef(0.6,0,0);//déplacement 2
 		
 		glPushMatrix();
 		glScalef(0.6,0.2,0.2);	//phalange 2
 		glutSolidCube(1);
 		glPopMatrix();
 		
+		glTranslatef(0.3,0,0);
+		glRotated(angleZ, 0,0,1);
+		glTranslatef(-0.3,0,0);
+		
 		glColor3f(0,0.3,0);
-		glTranslatef(0.9,0,0);//déplacement 3
+		glTranslatef(0.6,0,0);//déplacement 3
 		
 		glPushMatrix();
 		glScalef(0.6,0.2,0.2);	//phalange 3
@@ -96,47 +107,127 @@ GLvoid Modelisation()
 		glPopMatrix();
 	glPopMatrix();
 	
-	glPushMatrix(); //MAJEUR
+	
+	glPushMatrix();
+	//********** MAJEUR **********
+	
+		glTranslatef(1.3,0,0);
+		glRotated(angleE, 0,0,1);
+		glTranslatef(-1.3,0,0);
+		
 		glColor3f(0,0,0.1);
 		glTranslatef(1.65,0,-0.1);//déplacement 1
+		
+		glPushMatrix();
 		glScalef(0.8,0.2,0.2);	//phalange 1
-		glutSolidCube(1);		//création 1
+		glutSolidCube(1);
+		glPopMatrix();
+				
+		glTranslatef(0.35,0,0);
+		glRotated(angleE, 0,0,1);
+		glTranslatef(-0.35,0,0);
 		
 		glColor3f(0,0,0.2);
-		glTranslatef(0.9,0,0);//déplacement 2
-		glScalef(0.8,1,1);	//phalange 2
-		glutSolidCube(1);		//création 2
+		glTranslatef(0.8,0,0);//déplacement 2
+		
+		glPushMatrix();
+		glScalef(0.8,0.2,0.2);	//phalange 2
+		glutSolidCube(1);
+		glPopMatrix();
+		
+		glTranslatef(0.4,0,0);
+		glRotated(angleE, 0,0,1);
+		glTranslatef(-0.4,0,0);
 		
 		glColor3f(0,0,0.3);
-		glTranslatef(0.9,0,0);//déplacement 3
-		glScalef(0.8,1,1);	//phalange 3
-		glutSolidCube(1);		//création 3
+		glTranslatef(0.75,0,0);//déplacement 3
+		
+		glPushMatrix();
+		glScalef(0.7,0.2,0.2);	//phalange 3
+		glutSolidCube(1);
+		glPopMatrix();
+		
 	glPopMatrix();
 	
-	glPushMatrix(); //INDEX
+	glPushMatrix();
+	//********** INDEX **********
+	
+		glTranslatef(1.3,0,0);
+		glRotated(angleR, 0,0,1);
+		glTranslatef(-1.3,0,0);
+		
 		glColor3f(0.2,0.1,0);
 		glTranslatef(1.575,0,-0.4);//déplacement 1
+				
+		glPushMatrix();
 		glScalef(0.65,0.2,0.2);	//phalange 1
-		glutSolidCube(1);		//création 1
+		glutSolidCube(1);
+		glPopMatrix();
+		
+		glTranslatef(0.275,0,0);
+		glRotated(angleR, 0,0,1);
+		glTranslatef(-0.275,0,0);
 		
 		glColor3f(0.2,0.2,0);
-		glTranslatef(1,0,0);//déplacement 2
-		glScalef(1,1,1);	//phalange 2
-		glutSolidCube(1);		//création 2
+		glTranslatef(0.6,0,0);//déplacement 2
+		
+		glPushMatrix();
+		glScalef(0.6,0.2,0.2);	//phalange 2
+		glutSolidCube(1);
+		glPopMatrix();
+		
+		glTranslatef(.3,0,0);
+		glRotated(angleR, 0,0,1);
+		glTranslatef(-.3,0,0);
 		
 		glColor3f(0.2,0.3,0);
-		glTranslatef(0.9,0,0);//déplacement 3
-		glScalef(0.8,1,1);	//phalange 3
-		glutSolidCube(1);		//création 3
+		glTranslatef(0.7,0,0);//déplacement 3
+		
+		glPushMatrix();
+		glScalef(0.8,0.2,0.2);	//phalange 3
+		glutSolidCube(1);
+		glPopMatrix();
+		
 	glPopMatrix();
     
   }
   glPopMatrix();
+}
+
+void mon_triangle(){
+	glPushMatrix();
+	{
+			glRotatef(triangle, 0, 1, 0);
+			triangle = triangle+1;
+			glBegin(GL_TRIANGLES);
+				glVertex3f(0,2,0);
+				glVertex3f(0,-1,0);
+				glVertex3f(-1,-1,0);
+			glEnd();
+	}
+	glPopMatrix();
+	
+	time = glutGet(GLUT_ELAPSED_TIME);
+
+	printf=(time);
+
+}
+
+GLvoid Modelisation()
+{
+  VM_init(); //initialisation de la matrice de modélisation
+
+  // Entre glPushMatrix et glPopMatrix s'écrit la description de la scène.
+	
+  //ma_main();
+  
+  mon_triangle();
 
 
   axes();
   glutSwapBuffers();
 }
+
 
 int main(int argc, char **argv) 
 {  

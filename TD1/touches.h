@@ -15,6 +15,15 @@
 #define TOUCHE_MIN_Z 122
 #define TOUCHE_MAJ_Z 90
 
+#define TOUCHE_MIN_E 101
+#define TOUCHE_MAJ_E 69
+
+#define TOUCHE_MIN_R 114
+#define TOUCHE_MAJ_R 82
+
+#define TOUCHE_MIN_T 116
+#define TOUCHE_MAJ_T 84
+
 #define ESCAPE 27
 #define ESPACE 32
 

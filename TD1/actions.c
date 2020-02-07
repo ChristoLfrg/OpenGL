@@ -2,10 +2,13 @@
 #include <stdbool.h>
 extern GLfloat xrot;   
 extern GLfloat yrot; 
-extern blend;
-extern light;
+extern int blend;
+extern int light;
 extern GLfloat angleA;
 extern GLfloat angleZ;
+extern GLfloat angleE;
+extern GLfloat angleR;
+extern GLfloat angleT;
 
 bool trop (float a){
 	return  (a>=90);
@@ -44,11 +47,59 @@ void touche_pressee(unsigned char key, int x, int y)
 	 case TOUCHE_MAJ_A:
 		if (!moins(angleA)) angleA -=1;
 		
-		case TOUCHE_MIN_Z:
+	case TOUCHE_MIN_Z:
 		if (!trop(angleZ)) angleZ += 1;
 		break;
 	 case TOUCHE_MAJ_Z:
 		if (!moins(angleZ)) angleZ -=1;
+		
+	case TOUCHE_MIN_E:
+		if (!trop(angleE)) angleE += 1;
+		break;
+	 case TOUCHE_MAJ_E:
+		if (!moins(angleE)) angleE -=1;
+		
+	case TOUCHE_MIN_R:
+		if (!trop(angleR)) angleR += 1;
+		break;
+	 case TOUCHE_MAJ_R:
+		if (!moins(angleR)) angleR -=1;
+		
+	case TOUCHE_MIN_T:
+		if (!trop(angleT)) angleT += 1;
+		break;
+	 case TOUCHE_MAJ_T:
+		if (!moins(angleT)) angleT -=1;
     }	
 }
 
+void touche_speciale(int key, int x, int y)
+{
+	switch(key)
+	{
+		case GLUT_KEY_UP:
+			xrot -= 5;
+			glRotatef(xrot, 1, 0, 0);
+			glRotatef(yrot, 0, 1, 0);
+			break;
+			
+		case GLUT_KEY_DOWN:
+			xrot += 5;
+			glRotatef(xrot, 1, 0, 0);
+			glRotatef(yrot, 0, 1, 0);
+			break;
+			
+		case GLUT_KEY_LEFT:
+			yrot -= 5;
+			glRotatef(xrot, 1, 0, 0);
+			glRotatef(yrot, 0, 1, 0);
+			break;
+			
+		case GLUT_KEY_RIGHT:
+			yrot += 5;
+			glRotatef(xrot, 1, 0, 0);
+			glRotatef(yrot, 0, 1, 0);
+			break;
+	}
+	glutPostRedisplay();
+}

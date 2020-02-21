@@ -6,8 +6,7 @@
 #include <math.h>
 
 GLfloat xrot = 0.0f;   
-GLfloat yrot = 0.0f;   
-GLfloat z = -5.0f;
+GLfloat yrot = 0.0f;  
 
 int blend=0;
 int light=0;
@@ -222,7 +221,7 @@ static int faces[6][4] = {
 	{1, 4, 7, 2}, 		//DROITE
 	{5, 0, 3, 6}, 		//GAUCHE
 	{3, 2, 7, 6}, 		//DESSUS
-	{4, 5, 0, 1}		//DESSOUS
+	{5, 4, 1, 0}		//DESSOUS
 };
 float sommets[8][3] = {
 	{0, 3, 5}, 
@@ -291,21 +290,32 @@ void afficher_cube (struct cube c){
 	glEnd();
 }
 
+void ma_sphere () {
+	glPushMatrix();
+	{
+		glColor3f(1,1,0);
+		glRotatef(xrot, 1, 0, 0);	
+		glRotatef(yrot, 0, 1, 0);
+		glutSolidSphere(0.5,10,10);
+		glEnd();
+	}
+	glPopMatrix();
+}
 
 GLvoid Modelisation()
 {
-  VM_init(); //initialisation de la matrice de modélisation
+	VM_init(); //initialisation de la matrice de modélisation
 
-  // Entre glPushMatrix et glPopMatrix s'écrit la description de la scène.
-	
-  //ma_main();
-  
-  //mon_triangle();
-  
-	afficher_cube(creer_cube(1));
+	// Entre glPushMatrix et glPopMatrix s'écrit la description de la scène.
 
-  axes();
-  glutSwapBuffers();
+	//ma_main();
+
+	//mon_triangle();
+	//afficher_cube(creer_cube(1));
+	ma_sphere();
+
+	axes();
+	glutSwapBuffers();
 }
 
 

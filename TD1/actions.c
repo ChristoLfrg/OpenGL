@@ -1,9 +1,11 @@
 #include "actions.h"
 #include <stdbool.h>
 extern GLfloat xrot;   
-extern GLfloat yrot; 
+extern GLfloat yrot;
+
 extern int blend;
 extern int light;
+
 extern GLfloat angleA;
 extern GLfloat angleZ;
 extern GLfloat angleE;
@@ -79,26 +81,18 @@ void touche_speciale(int key, int x, int y)
 	{
 		case GLUT_KEY_UP:
 			xrot -= 5;
-			glRotatef(xrot, 1, 0, 0);
-			glRotatef(yrot, 0, 1, 0);
 			break;
 			
 		case GLUT_KEY_DOWN:
 			xrot += 5;
-			glRotatef(xrot, 1, 0, 0);
-			glRotatef(yrot, 0, 1, 0);
 			break;
 			
 		case GLUT_KEY_LEFT:
 			yrot -= 5;
-			glRotatef(xrot, 1, 0, 0);
-			glRotatef(yrot, 0, 1, 0);
 			break;
 			
 		case GLUT_KEY_RIGHT:
 			yrot += 5;
-			glRotatef(xrot, 1, 0, 0);
-			glRotatef(yrot, 0, 1, 0);
 			break;
 	}
 	glutPostRedisplay();

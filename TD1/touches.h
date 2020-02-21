@@ -29,8 +29,10 @@
 
 #define RETURN 13
 #define DELETE 8
+
 #define PAGE_UP 73
 #define PAGE_DOWN 81
+
 #define UP_ARROW 72
 #define DOWN_ARROW 80
 #define LEFT_ARROW 75

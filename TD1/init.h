@@ -11,7 +11,5 @@
 #include "lumiere.h"
 #include "actions.h"
 
-
-
 int notre_init(int argc, char** argv, void (*Modelisation)());
 #endif

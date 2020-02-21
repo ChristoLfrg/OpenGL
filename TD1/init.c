@@ -4,14 +4,14 @@ GLvoid Redimensionne(int Width, int Height){
 		glViewport (0,0,Width,Height);
 		glMatrixMode (GL_PROJECTION);
 		glLoadIdentity();
-		gluPerspective(45,1.33,0.1,100);
+		gluPerspective(45,(float) Width/(float) Height,0.1,100);
 		glMatrixMode (GL_MODELVIEW);
 }
 
 int notre_init(int argc, char** argv, void (*Modelisation)()) {
 	glutInit(&argc, argv);	
-	//argc et argv sont respectivement le nombre et la liste des paramètres passées en ligne de commande
-	glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE);
+
+	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowSize(1080,720);
 	glutInitWindowPosition(150,150);
 	glutCreateWindow("Donne moi ta main");
@@ -20,11 +20,10 @@ int notre_init(int argc, char** argv, void (*Modelisation)()) {
 	glutIdleFunc(Modelisation);
 	glutReshapeFunc(Redimensionne);
 	
-	
 	glutKeyboardFunc(touche_pressee);
 	glutSpecialFunc(touche_speciale);
 	
-	glClearColor(0.3,0.3,0.3,0);
+	glClearColor(0,0,0,0);
 	glutMainLoop();
 	return 1;
 }

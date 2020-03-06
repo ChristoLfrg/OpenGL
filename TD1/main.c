@@ -1,4 +1,4 @@
-// gcc main.c actions.c axes.o init.o lumiere.o switch_blend.o  switch_light.o VM_init.o -lm -lGL -lGLU -lglut -o test
+// gcc main.c actions.c axes.o init.c lumiere.o switch_blend.o  switch_light.o VM_init.c -lm -lGL -lGLU -lglut -o test
 
 #include "init.h"
 #include "axes.h"
@@ -187,7 +187,6 @@ void ma_main (){
 		glPopMatrix();
 		
 	glPopMatrix();
-    
   }
   glPopMatrix();
 }
@@ -219,9 +218,9 @@ static int faces[6][4] = {
 	{0, 1, 2, 3}, 		//AVANT
 	{4, 5, 6, 7}, 		//ARRIERE
 	{1, 4, 7, 2}, 		//DROITE
-	{5, 0, 3, 6}, 		//GAUCHE
-	{3, 2, 7, 6}, 		//DESSUS
-	{5, 4, 1, 0}		//DESSOUS
+	{0, 3, 6, 5}, 		//GAUCHE
+	{2, 7, 6, 3}, 		//DESSUS
+	{1, 0, 5, 4}		//DESSOUS
 };
 float sommets[8][3] = {
 	{0, 3, 5}, 
@@ -236,49 +235,84 @@ float sommets[8][3] = {
 
 struct cube {
 	int coord[8][3];
+	float color[6][4];
 };
 
 struct cube creer_cube(float taille){
 	struct cube c;
 	
-	c.coord[0][0] = -taille;
+	c.coord[0][0] = -taille; //0
 	c.coord[0][1] = -taille;
-	c.coord[0][2] = taille;
+	c.coord[0][2] =  taille;
 	
-	c.coord[1][0] = -taille;
-	c.coord[1][1] = taille;
-	c.coord[1][2] = taille;
+	c.coord[1][0] = taille;  //1
+	c.coord[1][1] = -taille;
+	c.coord[1][2] =  taille;
 	
-	c.coord[2][0] = taille;
+	c.coord[2][0] = taille;  //2
 	c.coord[2][1] = taille;
 	c.coord[2][2] = taille;
 	
-	c.coord[3][0] = taille;
-	c.coord[3][1] = -taille;
+	c.coord[3][0] = -taille; //3
+	c.coord[3][1] = taille;
 	c.coord[3][2] = taille;
 	
-	c.coord[4][0] = -taille;
+	c.coord[4][0] = taille;  //4
 	c.coord[4][1] = -taille;
 	c.coord[4][2] = -taille;
 	
-	c.coord[5][0] = -taille;
-	c.coord[5][1] = taille;
+	c.coord[5][0] = -taille; //5
+	c.coord[5][1] = -taille;
 	c.coord[5][2] = -taille;
 	
-	c.coord[6][0] = taille;
+	c.coord[6][0] = -taille; //6
 	c.coord[6][1] = taille;
 	c.coord[6][2] = -taille;
 	
-	c.coord[7][0] = taille;
-	c.coord[7][1] = -taille;
+	c.coord[7][0] = taille;  //7
+	c.coord[7][1] = taille;
 	c.coord[7][2] = -taille;
 	
+	c.color[0][0] = 1;	// AVANT
+	c.color[0][1] = 0;
+	c.color[0][2] = 0;
+	c.color[0][3] = 0;
+	
+	c.color[1][0] = 0;	// ARRIERE
+	c.color[1][1] = 1;
+	c.color[1][2] = 0;
+	c.color[1][3] = 0;
+	
+	c.color[2][0] = 0;	// DROITE
+	c.color[2][1] = 0;
+	c.color[2][2] = 1;
+	c.color[2][3] = 0;
+	
+	c.color[3][0] = 1;	// GAUCHE
+	c.color[3][1] = 0;
+	c.color[3][2] = 1;
+	c.color[3][3] = 0;
+	
+	c.color[4][0] = 1;	// DESSUS
+	c.color[4][1] = 1;
+	c.color[4][2] = 0;
+	c.color[4][3] = 0.8;
+	
+	c.color[5][0] = 0;	// DESSOUS
+	c.color[5][1] = 1;
+	c.color[5][2] = 1;
+	c.color[5][3] = 1;
+
 	return c;
 }
 
 void afficher_cube (struct cube c){
 	glBegin(GL_QUADS);
 		for (int i=0; i<6; i++){
+			glColor4f(	c.color[i][0],
+						c.color[i][1],
+						c.color[i][2],
+						c.color[i][3]);
 			for (int j=0; j<4; j++){
 				glVertex3f(
 					c.coord[faces[i][j]][0], 
@@ -305,14 +339,15 @@ void ma_sphere () {
 GLvoid Modelisation()
 {
 	VM_init(); //initialisation de la matrice de modélisation
-
+	glRotatef(xrot, 1, 0, 0);	
+	glRotatef(yrot, 0, 1, 0);
 	// Entre glPushMatrix et glPopMatrix s'écrit la description de la scène.
 
 	//ma_main();
 
 	//mon_triangle();
-	//afficher_cube(creer_cube(1));
-	ma_sphere();
+	afficher_cube(creer_cube(1));
+	//ma_sphere();
 
 	axes();
 	glutSwapBuffers();

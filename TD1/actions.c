@@ -77,23 +77,24 @@ void touche_pressee(unsigned char key, int x, int y)
 
 void touche_speciale(int key, int x, int y)
 {
+	usleep(100);
 	switch(key)
 	{
 		case GLUT_KEY_UP:
-			xrot -= 5;
+			xrot -= 5.0f;
 			break;
 			
 		case GLUT_KEY_DOWN:
-			xrot += 5;
+			xrot += 5.0f;
 			break;
 			
 		case GLUT_KEY_LEFT:
-			yrot -= 5;
+			yrot -= 5.0f;
 			break;
 			
 		case GLUT_KEY_RIGHT:
-			yrot += 5;
+			yrot += 5.0f;
 			break;
 	}
-	glutPostRedisplay();
+	
 }

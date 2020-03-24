@@ -4,11 +4,11 @@ int light=0;
 
 
 GLvoid Redimensionne(int Width, int Height){
-		glViewport (0,0,Width,Height);
-		glMatrixMode (GL_PROJECTION);
-		glLoadIdentity();
-		gluPerspective(45,(float) Width/(float) Height,0.1,100);
-		glMatrixMode (GL_MODELVIEW);
+	glViewport (0,0,Width,Height);
+	glMatrixMode (GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(45,(float) Width/(float) Height,0.1,100);
+	glMatrixMode (GL_MODELVIEW);
 }
 
 int notre_init(int argc, char** argv, void (*Modelisation)()) {
@@ -17,7 +17,7 @@ int notre_init(int argc, char** argv, void (*Modelisation)()) {
 	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA|GLUT_DEPTH);
 	glutInitWindowSize(720,420);
 	glutInitWindowPosition(200,200);
-	glutCreateWindow("My deer");
+	glutCreateWindow("Oh deer !");
 	
 	glutDisplayFunc(Modelisation);
 	glutIdleFunc(Modelisation);
@@ -25,7 +25,7 @@ int notre_init(int argc, char** argv, void (*Modelisation)()) {
 	
 	glutKeyboardFunc(touche_pressee);
 	glutSpecialFunc(touche_speciale);
-	glClearColor(0,0,0,0);
+	glClearColor(0.337, 0.694, 0.862,0);
 	
  	GLfloat position[4];
 	position[0]=0; position[1]=0; position[2]=0;
@@ -39,7 +39,6 @@ int notre_init(int argc, char** argv, void (*Modelisation)()) {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_DEPTH_TEST);
 	
-	glClearColor(0,0,0,0);
 	glutMainLoop();
 	return 1;
 }

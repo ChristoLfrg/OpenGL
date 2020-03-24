@@ -9,6 +9,9 @@
 #define TOUCHE_MIN_L 108
 #define TOUCHE_MAJ_L 76
 
+#define TOUCHE_MIN_P 112
+#define TOUCHE_MAJ_P 80
+
 #define TOUCHE_MIN_A 97
 #define TOUCHE_MAJ_A 65
 
